@@ -1,9 +1,9 @@
 package empresita.sectors
-import empresita.{Admin, Employee}
+import empresita.{Account, Admin, Economist, Employee}
 
 class Finance extends Sector {
   override def valid_employee(emp: Employee): Boolean = {
-    List(Admin, ).contains(emp.qualification)
+    List(Admin, Account, Economist).contains(emp.qualification)
 
   }
 

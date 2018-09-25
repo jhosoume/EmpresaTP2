@@ -3,8 +3,8 @@ package empresita.sectors
 import empresita.Employee
 
 trait Sector {
-  var emps: List[Employee]
-  var director: Employee
+  var emps: List[Employee] = _
+  var director: Employee = _
 
   def num_employee(): Int = emps.length
   def valid_employee(emp: Employee): Boolean
