@@ -6,9 +6,13 @@ trait Sector {
   var emps: List[Employee]
   var director: Employee
 
-  def num_employee(): Int
+  def num_employee(): Int = emps.length
   def valid_employee(emp: Employee): Boolean
-  def add_emp(emp: Employee): Unit
-  def remove_emp(name: String): Employee
-  def has_employee(name: String): Boolean
+  def add_emp(emp: Employee): Unit = {
+    if (valid_employee(emp))
+      emp :: emps
+  }
+  def remove_emp(emp_name: String): Unit = {
+  }
+  def has_employee(name: String): Boolean = true
 }

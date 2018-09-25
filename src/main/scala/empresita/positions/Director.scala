@@ -1,5 +1,3 @@
 package empresita.positions
 
-trait Director {
-
-}
+trait Director extends Position
