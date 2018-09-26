@@ -6,12 +6,19 @@ import scala.collection.mutable
 
 class Company(name: String) {
 
-  var sectors: mutable.HashMap[String, Sector] = mutable.HashMap(
+  var sectors: SectorContainer = new SectorContainer
 
-  )
+  var op_director: Employee = _
+  var exec_director: Employee = _
 
-  def change_sector(name: String) : Unit = {
+  def add_emp_to_sector(employee: Employee, sector_name: String): Unit = {
+    val sector = sectors.getSector(sector_name)
+    if (sector.valid_employee(employee)) sector.add_emp(employee)
+  }
+
+  def change_sector(emp_name: String) : Unit = {
 
   }
 
 }
+

@@ -5,6 +5,7 @@ import empresita.Employee
 trait Sector {
   var emps: List[Employee] = _
   var director: Employee = _
+  val name: String
 
   def num_employee(): Int = emps.length
   def valid_employee(emp: Employee): Boolean
