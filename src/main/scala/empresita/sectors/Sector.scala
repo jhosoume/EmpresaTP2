@@ -13,7 +13,10 @@ trait Sector {
     if (valid_employee(emp))
       emp :: emps
   }
-  def remove_emp(emp_name: String): Unit = {
+  def remove_emp(emp_cpf: String): Unit = {
+    emps = emps.filterNot(emp => emp.CPF == emp_cpf)
   }
-  def has_employee(name: String): Boolean = true
+  def has_employee(emp_CPF: String): Boolean = {
+    emps.exists(emp => emp.CPF == emp_CPF)
+  }
 }

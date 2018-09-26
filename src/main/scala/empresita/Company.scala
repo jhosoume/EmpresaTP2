@@ -1,8 +1,9 @@
 package empresita
 
-import empresita.sectors._
+import java.util.Date
 
-import scala.collection.mutable
+import empresita.sectors._
+import empresita.positions._
 
 class Company(name: String) {
 
@@ -16,8 +17,20 @@ class Company(name: String) {
     if (sector.valid_employee(employee)) sector.add_emp(employee)
   }
 
+  def hire(person: Person, sector: Sector, position: Position): Employee ={
+    val emp = new Employee(person.name, person.CPF, person.age, person.birthday, person.qualification,
+      this, new Date(), sector, position)
+
+    sector.add_emp(emp)
+
+  }
+
   def change_sector(emp_name: String) : Unit = {
 
+  }
+
+  def fire(CPF: String): Unit ={
+    re
   }
 
 }
