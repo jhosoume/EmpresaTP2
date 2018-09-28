@@ -14,4 +14,5 @@ case object Lawyer              extends Qualification
 case object GraphicDesigner     extends Qualification
 case object MultimediaDesigner  extends Qualification
 case object SocialEngineer      extends Qualification
+case object BasicSchooling      extends Qualification
 
