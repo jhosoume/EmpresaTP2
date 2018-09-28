@@ -1,5 +1,6 @@
 package empresita
 
+import java.time.LocalDate
 import java.util.Date
 
 import empresita.sectors._
@@ -18,17 +19,14 @@ class Company(name: String) {
   }
 
   def hire(person: Person, sector: Sector, position: Position): Unit ={
-    val emp = new Employee(person.name, person.CPF, person.age, person.birthday, person.qualification,
+    val emp = new Employee(person.name, person.CPF, person.birthday, person.qualification,
       this, new Date(), sector, position)
 
     sector.add_emp(emp)
   }
 
-  def change_sector(emp_name: String) : Unit = {
+  def fire(empCPF: String): Unit ={
 
-  }
-
-  def fire(CPF: String): Unit ={
   }
 
 }
