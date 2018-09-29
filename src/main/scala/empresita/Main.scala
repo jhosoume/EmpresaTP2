@@ -27,4 +27,8 @@ object Main extends App {
   val johnC = new Person("John Crichton", "11721812011",
     format.parse("11-12-1962"), SystemEngineer)
 
+  IASA.hire(johnC, "Tech", Technician)
+
+  
+
 }

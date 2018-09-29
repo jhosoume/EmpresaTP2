@@ -17,11 +17,12 @@ class Company(name: String) {
     if (sector.valid_employee(employee)) sector.add_emp(employee)
   }
 
-  def hire(person: Person, sector: Sector, position: Position): Unit ={
+  def hire(person: Person, sector: String, position: Position): Unit ={
+    val sec = sectors.getSector(sector)
     val emp = new Employee(person.name, person.CPF, person.birthday, person.qualification,
-      this, new Date(), sector, position)
+      this, new Date(), sec, position)
 
-    sector.add_emp(emp)
+    sec.add_emp(emp)
   }
 
   def fire(empCPF: String): Unit ={
