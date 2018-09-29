@@ -14,10 +14,11 @@ class EmployeeTests extends FlatSpec with Matchers{
   val johnC = new Person("John Crichton", "11721812011",
     format.parse("11-12-1962"), SystemEngineer)
 
-  IASA.hire(johnC, "Tech", Technician)
+  IASA.hire(johnC, IASA.sectors.tech, Technician)
 
   "John Crichton" should "have been correctly hired by IASA" in {
-    IASA.sectors.getSector("Tech").getEmployee(johnC.CPF) should equal(johnC)
+    println(IASA.sectors.tech.emps)
+    IASA.sectors.tech.getEmployee(johnC.CPF).CPF should equal(johnC.CPF)
   }
 
 }

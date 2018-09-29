@@ -5,7 +5,7 @@ import empresita.positions.{Position, SectorDirector}
 import scala.util.control._
 
 trait Sector {
-  var emps: List[Employee] = _
+  var emps: List[Employee] = List[Employee]()
   var director: Employee = _
   val name: String
 
@@ -30,7 +30,7 @@ trait Sector {
 
   def add_emp(emp: Employee): Unit = {
     if (valid_employee(emp))
-      emp :: emps
+      emps = emp :: emps
   }
   def remove_emp(emp_cpf: String): Unit = {
     emps = emps.filterNot(emp => emp.CPF == emp_cpf)
@@ -39,9 +39,7 @@ trait Sector {
     emps.exists(emp => emp.CPF == emp_CPF)
   }
 
-  def getEmployee(empCPF: String){
-    if (emps.exists(emp => emp.CPF == empCPF)){
-      emps.find(_.CPF == empCPF)
-    }
+  def getEmployee(empCPF: String): Employee = {
+    emps.find(_.CPF == empCPF).get
   }
 }
