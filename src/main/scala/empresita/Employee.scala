@@ -1,6 +1,5 @@
 package empresita
 
-import java.time.LocalDate
 import java.util.Date
 
 import empresita.positions.{Hierarchy, Position}
@@ -19,9 +18,9 @@ class Employee(name: String, CPF: String, birthday: Date, qualification: Qualifi
   }
 
   def change_sector(newSector: Sector) : Unit = {
+    newSector.add_emp(this)
     sector.remove_emp(CPF)
     sector = newSector
-    newSector.add_emp(this)
   }
 
   def salary(): Double = {position.salary*position.bonus+raise_salary}

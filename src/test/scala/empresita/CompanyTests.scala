@@ -12,7 +12,7 @@ class CompanyTests extends FlatSpec with Matchers {
 
   "Sectors from different companies" should "not be the same" in {
     val anotherCom = new Company("hardCom")
-    anotherCom.sectors.design shouldNot be theSameInstanceAs(dummyCom.sectors.design)
+    anotherCom.sectors.design shouldNot be theSameInstanceAs dummyCom.sectors.design
   }
 
 }

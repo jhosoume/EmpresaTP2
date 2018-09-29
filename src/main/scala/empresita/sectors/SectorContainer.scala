@@ -10,6 +10,6 @@ class SectorContainer {
   def getSector(name: String): Sector = {
     val attr = this.getClass.getDeclaredField(name)
     attr.setAccessible(true)
-    return attr.get(this).asInstanceOf[Sector]
+    attr.get(this).asInstanceOf[Sector]
   }
 }

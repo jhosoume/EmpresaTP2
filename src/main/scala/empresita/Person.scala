@@ -8,9 +8,9 @@ class Person(val name: String, val CPF: String, val birthday: Date, var qualific
     name
   }
 
-  val bday: LocalDate = birthday.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+  val bday: LocalDate = birthday.toInstant.atZone(ZoneId.systemDefault()).toLocalDate
 
   def age: Int ={
-    Period.between(bday, LocalDate.now).getYears()
+    Period.between(bday, LocalDate.now).getYears
   }
 }
