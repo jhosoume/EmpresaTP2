@@ -1,6 +1,7 @@
 package empresita
 
 import java.text.SimpleDateFormat
+import java.util.Date
 
 import empresita.positions._
 import empresita.sectors._
@@ -16,9 +17,26 @@ class EmployeeTests extends FlatSpec with Matchers{
 
   IASA.hire(johnC, IASA.sectors.tech, Technician)
 
-  "John Crichton" should "have been correctly hired by IASA" in {
-    println(IASA.sectors.tech.emps)
+  "John Crichton's CPF" should " be linked to an employee" in {
     IASA.sectors.tech.getEmployee(johnC.CPF).CPF should equal(johnC.CPF)
   }
+
+  "John Crichton" should "be listed as a Technician" in {
+    IASA.sectors.tech.getEmployee(johnC.CPF).position should equal(Technician)
+  }
+
+  "The salary of a technician" should "be 3350" in {
+    IASA.sectors.tech.getEmployee(johnC.CPF).salary should equal(3350)
+  }
+
+  val cobJ = new Employee("Cob Jones", "10023252500",
+    format.parse("20-08-1960"), Admin, IASA, new Date(), IASA.sectors.finance,
+    Pro)
+
+  //TODO add employee to the employee list in each sector
+  "Cob" should "be an employee at the finance department" in {
+    IASA.sectors.finance.has_employee(cobJ.CPF) should equal(true)
+  }
+
 
 }

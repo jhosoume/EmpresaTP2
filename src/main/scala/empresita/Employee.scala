@@ -12,6 +12,9 @@ class Employee(name: String, CPF: String, birthday: Date, qualification: Qualifi
 
   var raise_salary: Float = 0
 
+  //TODO add the employee to the employee list of employees in his sector
+  //TODO if the employee is a director assign him to the position val
+
   def promote(new_position: Position = null): Unit = {
     if(new_position != null) position = new_position
     else position = Hierarchy.next_pos(position)
@@ -23,7 +26,7 @@ class Employee(name: String, CPF: String, birthday: Date, qualification: Qualifi
     sector = newSector
   }
 
-  def salary(): Double = {position.salary*position.bonus+raise_salary}
+  def salary(): Double = {(position.salary+position.commute_voucher)*position.bonus+raise_salary}
 
 
 }
