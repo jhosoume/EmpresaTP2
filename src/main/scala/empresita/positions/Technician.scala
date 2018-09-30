@@ -7,6 +7,6 @@ object Technician extends Position {
   override val salary: Float = 3000
 
   override def has_requirements(emp: Employee): Boolean = {
-    return true
+    true
   }
 }

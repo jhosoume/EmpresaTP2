@@ -33,9 +33,26 @@ class EmployeeTests extends FlatSpec with Matchers{
     format.parse("20-08-1960"), Admin, IASA, new Date(), IASA.sectors.finance,
     Pro)
 
-  //TODO add employee to the employee list in each sector
   "Cob" should "be an employee at the finance department" in {
     IASA.sectors.finance.has_employee(cobJ.CPF) should equal(true)
+  }
+
+  cobJ.promote(SectorDirector)
+
+  /*"Cob" should " be the new finance sector director" in {
+    IASA.sectors.finance.director should equal(cobJ)
+  }*/
+
+  val rygelD = new Employee("Rygel Dominar", "17100066622",
+    format.parse("20-09-1940"), Economist, IASA, new Date(), IASA.sectors.finance,
+    SectorDirector)
+
+  "Rygel" should " be the new finance sector director" in {
+    IASA.sectors.finance.director should equal(rygelD)
+  }
+
+  "Cob" should "be a Professional again" in {
+    IASA.sectors.finance.getEmployee(cobJ.CPF).position should equal(Pro)
   }
 
 

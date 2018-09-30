@@ -6,6 +6,6 @@ object ExecutiveDirector extends Director {
   override val salary: Float = 18000
 
   override def has_requirements(emp: Employee): Boolean = {
-    return true
+    true
   }
 }

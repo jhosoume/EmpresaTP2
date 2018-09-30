@@ -8,7 +8,7 @@ object Assistant extends Position {
 
 
   override def has_requirements(emp: Employee): Boolean = {
-    return true
+    true
 
   }
 

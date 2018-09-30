@@ -26,5 +26,13 @@ class Company(name: String) {
 
   }
 
+  def salaryAvg(): Double ={
+    (sectors.design.salaryAvg()+
+    sectors.finance.salaryAvg()+
+    sectors.marketing.salaryAvg()+
+    sectors.norm.salaryAvg()+
+    sectors.tech.salaryAvg())/5
+  }
+
 }
 
