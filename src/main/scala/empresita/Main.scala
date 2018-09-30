@@ -20,7 +20,9 @@ object Main extends App {
 
   println(eu2.getName)
   println(eu.getName)
-  //Hierarchy.next_pos(ExecutiveDirector)TODO error here*
+  Hierarchy.next_pos(ExecutiveDirector)
+  Hierarchy.prev_pos(Assistant)
+
 
   val IASA = new Company("IASA")
 
