@@ -1,8 +1,10 @@
 package empresita
 
 import java.text.SimpleDateFormat
+import java.util.Date
 
-import empresita.sectors.{Sector, Tech, SectorContainer}
+import empresita.positions.{Pro, SectorDirector}
+import empresita.sectors.{Sector, SectorContainer, Tech}
 import org.scalatest.{FlatSpec, Matchers}
 
 

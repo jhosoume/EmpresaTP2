@@ -5,23 +5,18 @@ import empresita.positions.{Position, SectorDirector}
 
 trait Sector {
   var emps: Set[Employee] = Set[Employee]()
-  var director: Employee = _
+  var director: Employee = _//TODO guarantee that the director is part of the sector
   val name: String
 
   def change_director(newDirector: Employee, newPosition: Position = null): Unit ={
-    if(director == null)
-      newDirector.promote(SectorDirector)
-    else {
-      if (newPosition != null){
+    if(director != null) {
+      if (newPosition != null) {
         director.promote(newPosition)
-        newDirector.promote(SectorDirector)
-      }else{
-        //println("Old director needs new position. Aborting.")
-        //TODO create an exception NoNewPositionForExDirector
-        director.demote()
-        //Breaks
+      } else {
+        director.demote() //TODO assess if there are any problems with qualification
       }
     }
+    newDirector.promote(SectorDirector)
     director = newDirector
   }
 
@@ -34,11 +29,15 @@ trait Sector {
       emps += emp
     //else TODO throw InvalidEmployeeException
   }
-  def remove_emp(emp_cpf: String): Unit = {
-    emps = emps.filterNot(emp => emp.CPF == emp_cpf)
+
+  def remove_emp(empCPF: String): Unit = {
+    emps = emps.filterNot(emp => emp.CPF == empCPF)
+    if(emps.find(_.CPF == empCPF).get.position == director)
+      director = null
   }
-  def has_employee(emp_CPF: String): Boolean = {
-    emps.exists(emp => emp.CPF == emp_CPF)
+
+  def has_employee(empCPF: String): Boolean = {
+    emps.exists(emp => emp.CPF == empCPF)
   }
 
   def getEmployee(empCPF: String): Employee = {

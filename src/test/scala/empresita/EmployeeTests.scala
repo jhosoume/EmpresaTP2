@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat
 import java.util.Date
 
 import empresita.positions._
-import empresita.sectors._
 import org.scalatest.{FlatSpec, Matchers}
 
 class EmployeeTests extends FlatSpec with Matchers{
@@ -53,6 +52,18 @@ class EmployeeTests extends FlatSpec with Matchers{
 
   "Cob" should "be a Professional again" in {
     IASA.sectors.finance.getEmployee(cobJ.CPF).position should equal(Pro)
+  }
+
+  val dummyComp = new Company("Dumb")
+  val dummyEmp1 = new Employee("Emp1", "001", format.parse("01-01-1980"),
+    Lawyer, dummyComp, new Date(), dummyComp.sectors.norm, Pro)
+  val dummyEmp2 = new Employee("Emp2", "002", format.parse("01-01-1980"),
+    Lawyer, dummyComp, new Date(), dummyComp.sectors.norm, SectorDirector)
+
+  dummyComp.sectors.norm.change_director(dummyEmp1)
+
+  "The sector director" should " be changed to dummyEmp1" in {
+    dummyComp.sectors.norm.director should equal(dummyEmp1)
   }
 
 
