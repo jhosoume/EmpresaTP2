@@ -12,33 +12,29 @@ class Company(name: String) {
   var op_director: Employee = _
   var exec_director: Employee = _
 
-  /*def assign_opDirector(newOp: Employee, newPosition: Position = null): Unit ={
-    if(op_director == null)
-      newOp.promote(OperationDirector)
-    else {
-      if (newPosition != null){
+  def assign_opDirector(newOp: Employee, newPosition: Position = null): Unit ={
+    if(op_director != null){
+      if (newPosition != null)
         op_director.promote(newPosition)
-        newOp.promote(OperationDirector)
-      }else{
+      else{
         //TODO demote() wont work for these directors
       }
     }
     op_director = newOp
+    newOp.promote(OperationDirector)
   }
 
   def assign_execDirector(newExec: Employee, newPosition: Position = null): Unit ={
-    if(exec_director == null)
-      newExec.promote(ExecutiveDirector)
-    else {
-      if (newPosition != null){
+    if(exec_director != null){
+      if (newPosition != null)
         exec_director.promote(newPosition)
-        newExec.promote(ExecutiveDirector)
-      }else{
+      else{
         //TODO demote() wont work for these directors
       }
     }
-    op_director = newExec
-  }*/
+    exec_director = newExec
+    newExec.promote(ExecutiveDirector)
+  }
 
   def add_emp_to_sector(employee: Employee, sector: Sector): Unit = {
     if (sector.valid_employee(employee)) sector.add_emp(employee)

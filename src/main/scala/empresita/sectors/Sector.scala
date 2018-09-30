@@ -10,9 +10,9 @@ trait Sector {
 
   def change_director(newDirector: Employee, newPosition: Position = null): Unit ={
     if(director != null) {
-      if (newPosition != null) {
+      if (newPosition != null)
         director.promote(newPosition)
-      } else {
+      else {
         director.demote() //TODO assess if there are any problems with qualification
       }
     }
