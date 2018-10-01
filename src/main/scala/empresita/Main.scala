@@ -55,6 +55,7 @@ object Main extends App {
   println(IASA.sectors.design.salaryAvg())
   println(IASA.sectors.design.num_employee())
   println(IASA.salaryAvg())
+  println(IASA.sectors.meanSalary())
 
   
 

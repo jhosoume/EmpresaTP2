@@ -6,7 +6,7 @@ object Hierarchy {
   def next_pos(pos: Position): Position = {
     if (pos == ExecutiveDirector) {
       ExecutiveDirector
-    }else {
+    } else {
       val indx = positions.zipWithIndex.find(_._1 == pos).map(_._2).get + 1
       positions(indx)
     }
@@ -14,7 +14,7 @@ object Hierarchy {
   def prev_pos(pos: Position): Position = {
     if (pos == Assistant) {
       Assistant
-    }else {
+    } else {
       val indx = positions.zipWithIndex.find(_._1 == pos).map(_._2).get - 1
       positions(indx)
     }

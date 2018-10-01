@@ -21,6 +21,7 @@ class CompanyTests extends FlatSpec with Matchers {
     anotherCom.sectors.design shouldNot be theSameInstanceAs dummyCom.sectors.design
   }
 
+
   val dummyComp = new Company("Dumb")
   val dummyEmp1 = new Employee("Emp1", "001", format.parse("01-01-1980"),
     Lawyer, dummyComp, new Date(), dummyComp.sectors.norm, Pro)

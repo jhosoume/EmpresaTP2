@@ -24,10 +24,13 @@ trait Sector {
 
   def valid_employee(emp: Employee): Boolean
 
+  @throws(classOf[InvalidSectorException])
   def add_emp(emp: Employee): Unit = {
-    if (valid_employee(emp))
+    if (valid_employee(emp)) {
       emps += emp
-    //else TODO throw InvalidEmployeeException
+    } else {
+      throw new InvalidSectorException("Employee does not satisfy sector requirements.")
+    }
   }
 
   def remove_emp(empCPF: String): Unit = {
@@ -44,9 +47,9 @@ trait Sector {
     emps.find(_.CPF == empCPF).get
   }
 
-  def salaryAvg(): Double ={
-    if(num_employee()==0)
-      0
-    else emps.map(x => getEmployee(x.CPF).salary()).sum/emps.size
+  def salaryAvg(): Double = {
+    if(num_employee() <= 0) {
+      0.0
+    } else emps.map(x => getEmployee(x.CPF).salary()).sum / emps.size
   }
 }

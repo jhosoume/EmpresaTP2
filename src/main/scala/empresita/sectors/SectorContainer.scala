@@ -8,8 +8,30 @@ class SectorContainer {
   var tech = new Tech
 
   def getSector(name: String): Sector = {
-    val attr = this.getClass.getDeclaredField(name)
+    val attr = this.getClass.getDeclaredField(name.toLowerCase)
     attr.setAccessible(true)
     attr.get(this).asInstanceOf[Sector]
+  }
+
+  def sectorsObjs(): Set[Sector] = {
+    val attrs = this.getClass.getDeclaredFields
+    var sectors: Set[Sector] = Set[Sector]()
+    for (at <- attrs ) {
+      at.setAccessible(true)
+      sectors += at.get(this).asInstanceOf[Sector]
+    }
+    sectors
+  }
+
+  def size(): Int = {
+    sectorsObjs().size
+  }
+
+  def meanSalary(): Double = {
+    if (size() <= 0) {
+      0.0
+    } else {
+      sectorsObjs().map(_.salaryAvg()).sum / size()
+    }
   }
 }
