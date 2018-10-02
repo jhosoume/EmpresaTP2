@@ -45,9 +45,18 @@ class SectorTests extends FlatSpec with Matchers {
     company.sectors.tech.salaryAvg() should equal(3350)
     company.hire(new Person("Geroge Walrus", "123.789.941-10", format.parse("09-09-1945"),
       ComputationEngineer), company.sectors.tech, SectorDirector)
-     company.hire(new Person("Geroge Walrus 2", "123.789.001-10", format.parse("21-09-1975"),
-       Lawyer), company.sectors.design, Assistant)
     company.sectors.tech.salaryAvg() should equal(5463.33 +- 0.01)
+  }
+
+  "Adding an employee to another sector" should "not influence average" in {
+    val company = new Company("Dummy Company")
+    company.hire(new Person("John Alfred", "123.456.789-10", format.parse("10-11-1990"),
+      SystemEngineer), company.sectors.tech, Technician)
+    company.sectors.tech.salaryAvg() should equal(3350)
+    company.hire(new Person("Geroge Walrus 2", "123.789.001-10", format.parse("21-09-1975"),
+      Lawyer), company.sectors.design, Assistant)
+    company.sectors.tech.salaryAvg() should equal(3350)
+
   }
 
 

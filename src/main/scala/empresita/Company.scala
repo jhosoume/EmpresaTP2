@@ -40,6 +40,14 @@ class Company(name: String) {
     if (sector.valid_employee(employee)) sector.add_emp(employee)
   }
 
+  def emps(): Set[Employee] = {
+    sectors.sectorsObjs().flatMap(_.emps)
+  }
+
+  def emps_names(): Set[String] = {
+    sectors.sectorsObjs().flatMap(_.emps_names())
+  }
+
   def hire(person: Person, sector: Sector, position: Position): Employee = {
     new Employee(person.name, person.CPF, person.birthday, person.qualification,
       this, new Date(), sector, position)
@@ -74,12 +82,12 @@ class Company(name: String) {
   }//TODO turn employee into just a person?
     //TODO employee is really gone or just inaccessible?
 
-  def salaryAvg(): Double ={
-    (sectors.design.salaryAvg()+
-    sectors.finance.salaryAvg()+
-    sectors.marketing.salaryAvg()+
-    sectors.norm.salaryAvg()+
-    sectors.tech.salaryAvg())/5
+  def empsSalaryMean(): Double = {
+    sectors.meanSalaryEmployees()
+  }
+
+  def sectorsSalaryMean(): Double = {
+    sectors.meanSalarySectors()
   }
 
 }
