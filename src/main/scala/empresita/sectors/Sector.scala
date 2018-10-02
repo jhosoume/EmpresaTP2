@@ -8,13 +8,21 @@ trait Sector {
   var director: Employee = null//TODO guarantee that the director is part of the sector
   val name: String
 
+  def emps_names(): Set[String] = {
+    emps.map(_.name)
+  }
+
+  def emps_CPF(): Set[String] = {
+    emps.map(_.CPF)
+  }
+
   def change_director(newDirector: Employee, newPosition: Position = null): Unit = {
     if (newDirector.sector == this) {
       if (director != null) {
         if (newPosition != null)
           director.promote(newPosition)
         else {
-          director.position = Pro //TODO assess if there are any problems with qualification
+          director.position = Pro
         }
       }
       director = newDirector
@@ -52,12 +60,13 @@ trait Sector {
 
   @throws(classOf[Exception])
   def getEmployee(empCPF: String): Employee = {
-    emps.find(_.CPF == empCPF).getOrElse(throw new Exception("Employee not found"))
+    emps.find(_.CPF == empCPF).orNull
   }
 
   def salaryAvg(): Double = {
     if(num_employee() <= 0) {
       0.0
-    } else emps.map(x => getEmployee(x.CPF).salary()).sum / emps.size
+    } else emps.toList.map(x => getEmployee(x.CPF).salary()).sum / emps.size
+
   }
 }

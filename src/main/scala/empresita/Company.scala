@@ -45,8 +45,8 @@ class Company(name: String) {
       this, new Date(), sector, position)
   }
 
-  def get_employee(CPF: String): Unit = {
-    println(sectors.sectorsObjs().map(_.getEmployee(CPF)))
+  def get_employee(CPF: String): Employee = {
+    sectors.sectorsObjs().map(_.getEmployee(CPF)).find(emp => emp != null && emp.CPF == CPF).orNull
   }
 
 //  def hire(person: Person, sector: String, position: Position): Employee = {

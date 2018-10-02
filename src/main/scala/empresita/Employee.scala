@@ -12,17 +12,15 @@ class Employee(name: String, CPF: String, birthday: Date, qualification: Qualifi
 
   sector.add_emp(this)
 
-  var raise_salary: Float = 0
+  var raise_salary: Double = 0
 
   def promote(new_position: Position = null): Unit = {
     if (new_position == SectorDirector) {
       sector.change_director(this)
-    }
-    else {
+    } else {
       if (new_position != null) position = new_position
       else position = Hierarchy.next_pos(position)
     }
-
   }
 
   def demote(): Unit ={
