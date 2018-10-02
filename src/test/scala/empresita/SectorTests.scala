@@ -1,6 +1,8 @@
 package empresita
 
 import java.text.SimpleDateFormat
+
+import empresita.positions.Technician
 import empresita.sectors.{Sector, SectorContainer, Tech}
 import org.scalatest.{FlatSpec, Matchers}
 
@@ -33,8 +35,15 @@ class SectorTests extends FlatSpec with Matchers {
     sectors.tech.salaryAvg() should equal (0)
   }
 
+  "Add employee" should "correctly include an employee to the company" in {
+
+  }
+
   "The mean sector salary" should "equal the sum of the salary of all employees divided by its size" in {
     val company = new Company("Dummy Company")
+    company.hire(new Person("John Alfred", "123.456.789-10", format.parse("10-11-1990"), SystemEngineer), company.sectors.tech, Technician)
     sectors.meanSalary()
   }
+
+
 }

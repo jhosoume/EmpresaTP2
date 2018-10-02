@@ -36,21 +36,18 @@ class EmployeeTests extends FlatSpec with Matchers{
     IASA.sectors.finance.has_employee(cobJ.CPF) should equal(true)
   }
 
-  cobJ.promote(SectorDirector)
-
-  /*"Cob" should " be the new finance sector director" in {
-    IASA.sectors.finance.director should equal(cobJ)
-  }*/
-
-  val rygelD = new Employee("Rygel Dominar", "17100066622",
-    format.parse("20-09-1940"), Economist, IASA, new Date(), IASA.sectors.finance,
-    SectorDirector)
-
-  "Rygel" should " be the new finance sector director" in {
-    IASA.sectors.finance.director should equal(rygelD)
+  "Cob" should " be the new finance sector director" in {
+    cobJ.promote(SectorDirector)
+    IASA.sectors.finance.director.name should equal(cobJ.name)
   }
 
-  "Cob" should "be a Professional again" in {
+
+  "Rygel" should " be the new finance sector director" in {
+    cobJ.promote(SectorDirector)
+    val rygelD = new Employee("Rygel Dominar", "17100066622",
+      format.parse("20-09-1940"), Economist, IASA, new Date(), IASA.sectors.finance,
+      SectorDirector)
+    IASA.sectors.finance.director.name should equal(rygelD.name)
     IASA.sectors.finance.getEmployee(cobJ.CPF).position should equal(Pro)
   }
 
@@ -60,10 +57,15 @@ class EmployeeTests extends FlatSpec with Matchers{
   val dummyEmp2 = new Employee("Emp2", "002", format.parse("01-01-1980"),
     Lawyer, dummyComp, new Date(), dummyComp.sectors.norm, SectorDirector)
 
-  dummyComp.sectors.norm.change_director(dummyEmp1)
 
   "The sector director" should " be changed to dummyEmp1" in {
+    dummyComp.sectors.norm.change_director(dummyEmp1)
     dummyComp.sectors.norm.director should equal(dummyEmp1)
+  }
+
+  "Qualification of an employee" should "be easily changed" in {
+    dummyEmp1.qualification = Account
+    dummyEmp1.qualification should equal (Account)
   }
 
 

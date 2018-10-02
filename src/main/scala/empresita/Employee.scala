@@ -12,22 +12,21 @@ class Employee(name: String, CPF: String, birthday: Date, qualification: Qualifi
 
   sector.add_emp(this)
 
-  if(position == SectorDirector)
-    sector.change_director(this)
-
   var raise_salary: Float = 0
 
   def promote(new_position: Position = null): Unit = {
-    if(new_position != null) {
-      position = new_position
-      if(position == SectorDirector)
-        sector.director = this
+    if (new_position == SectorDirector) {
+      sector.change_director(this)
     }
-    else position = Hierarchy.next_pos(position)
+    else {
+      if (new_position != null) position = new_position
+      else position = Hierarchy.next_pos(position)
+    }
+
   }
-  def demote(new_position: Position = null): Unit ={
-    if(new_position != null) position = new_position
-    else position = Hierarchy.prev_pos(position)
+
+  def demote(): Unit ={
+    position = Hierarchy.prev_pos(position)
   }
 
   def change_sector(newSector: Sector) : Unit = {

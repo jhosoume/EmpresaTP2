@@ -40,11 +40,31 @@ class Company(name: String) {
     if (sector.valid_employee(employee)) sector.add_emp(employee)
   }
 
-  def hire(person: Person, sector: Sector, position: Position): Unit = {
-    val emp = new Employee(person.name, person.CPF, person.birthday, person.qualification,
+  def hire(person: Person, sector: Sector, position: Position): Employee = {
+    new Employee(person.name, person.CPF, person.birthday, person.qualification,
       this, new Date(), sector, position)
-    sector.add_emp(emp)
   }
+
+  def get_employee(CPF: String): Unit = {
+    println(sectors.sectorsObjs().map(_.getEmployee(CPF)))
+  }
+
+//  def hire(person: Person, sector: String, position: Position): Employee = {
+//    val sec = this.sectors.getSector(sector)
+//    hire(person, sec, position)
+//  }
+//
+//  def hire(name: String, CPF: String, birthday: Date, qualification: Qualification, sector: Sector, position: Position): Employee = {
+//    val pers = new Person(name, CPF, birthday, qualification)
+//    hire(pers, sector, position)
+//  }
+//
+//  def hire(name: String, CPF: String, birthday: Date, qualification: Qualification, sector: String, position: Position): Employee = {
+//    val sec = this.sectors.getSector(sector)
+//    val pers = new Person(name, CPF, birthday, qualification)
+//    hire(pers, sec, position)
+//  }
+
 
   /*def fire(empCPF: String): Unit ={
     TODO keep this change?
