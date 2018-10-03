@@ -2,7 +2,7 @@ package empresita
 
 import java.text.SimpleDateFormat
 
-import empresita.positions.Technician
+import empresita.positions.{SectorDirector, Technician, Assistant}
 import empresita.sectors.{Sector, SectorContainer, Tech}
 import org.scalatest.{FlatSpec, Matchers}
 
@@ -27,7 +27,7 @@ class SectorTests extends FlatSpec with Matchers {
   }
 
   "The size of sector container" should "be at least 5" in {
-    sectors.size() should be >= (5)
+    sectors.size() should be >= 5
   }
 
   "Sectors without employees" should "have mean salary of 0" in {
@@ -35,14 +35,28 @@ class SectorTests extends FlatSpec with Matchers {
     sectors.tech.salaryAvg() should equal (0)
   }
 
-  "Add employee" should "correctly include an employee to the company" in {
-
-  }
-
   "The mean sector salary" should "equal the sum of the salary of all employees divided by its size" in {
     val company = new Company("Dummy Company")
-    company.hire(new Person("John Alfred", "123.456.789-10", format.parse("10-11-1990"), SystemEngineer), company.sectors.tech, Technician)
-    sectors.meanSalary()
+    company.hire(new Person("John Alfred", "123.456.789-10", format.parse("10-11-1990"),
+      SystemEngineer), company.sectors.tech, Technician)
+    company.sectors.tech.salaryAvg() should equal(3350)
+    company.hire(new Person("Manfred Griffin", "123.456.941-10", format.parse("10-09-1988"),
+      SystemEngineer), company.sectors.tech, Technician)
+    company.sectors.tech.salaryAvg() should equal(3350)
+    company.hire(new Person("Geroge Walrus", "123.789.941-10", format.parse("09-09-1945"),
+      ComputationEngineer), company.sectors.tech, SectorDirector)
+    company.sectors.tech.salaryAvg() should equal(5463.33 +- 0.01)
+  }
+
+  "Adding an employee to another sector" should "not influence average" in {
+    val company = new Company("Dummy Company")
+    company.hire(new Person("John Alfred", "123.456.789-10", format.parse("10-11-1990"),
+      SystemEngineer), company.sectors.tech, Technician)
+    company.sectors.tech.salaryAvg() should equal(3350)
+    company.hire(new Person("Geroge Walrus 2", "123.789.001-10", format.parse("21-09-1975"),
+      Lawyer), company.sectors.design, Assistant)
+    company.sectors.tech.salaryAvg() should equal(3350)
+
   }
 
 

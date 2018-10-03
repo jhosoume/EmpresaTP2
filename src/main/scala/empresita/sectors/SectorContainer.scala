@@ -1,5 +1,7 @@
 package empresita.sectors
 
+import empresita.Employee
+
 class SectorContainer {
   var finance = new Finance
   var design = new Design
@@ -27,11 +29,29 @@ class SectorContainer {
     sectorsObjs().size
   }
 
-  def meanSalary(): Double = {
+  def meanSalarySectors(): Double = {
     if (size() <= 0) {
       0.0
     } else {
-      sectorsObjs().map(_.salaryAvg()).sum / size()
+      sectorsObjs().toList.map(_.salaryAvg()).sum / size()
+    }
+  }
+
+  def allEmps(): Set[Employee] = {
+    sectorsObjs().flatMap(_.emps)
+  }
+
+  def numEmps(): Int = {
+    sectorsObjs().flatMap(_.emps).size
+  }
+
+
+  def meanSalaryEmployees(): Double = {
+    val nEmp = numEmps()
+    if (nEmp <= 0) {
+      0.0
+    } else {
+      allEmps().toList.map(_.salary()).sum / nEmp
     }
   }
 }
