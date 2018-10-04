@@ -28,8 +28,8 @@ class Employee(name: String, CPF: String, birthday: Date, qualification: Qualifi
   }
 
   def change_sector(newSector: Sector) : Unit = {
-    newSector.add_emp(this)
     sector.remove_emp(CPF)
+    newSector.add_emp(this)
     sector = newSector
   }
 

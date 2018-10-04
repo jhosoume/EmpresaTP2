@@ -5,7 +5,7 @@ import empresita.{Employee, Qualification}
 trait Position extends Ordered[Position]{
   val hierarchy: Int
   val commute_voucher: Float = 0
-  val salary: Float
+  val salary: Double
   val bonus: Double = 1
 
   def has_requirements(emp: Employee) : Boolean
