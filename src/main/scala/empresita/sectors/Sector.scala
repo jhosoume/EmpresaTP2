@@ -50,7 +50,7 @@ trait Sector {
 
   def remove_emp(empCPF: String): Unit = {
     emps = emps.filterNot(emp => emp.CPF == empCPF)
-    if (emps.find(_.CPF == empCPF).get.position == director)
+    if (emps.find(_.CPF == empCPF).get == director)
       director = null
   }
 
