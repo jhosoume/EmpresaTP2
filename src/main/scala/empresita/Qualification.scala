@@ -7,7 +7,7 @@ case object Account             extends Qualification
 case object Economist           extends Qualification
 case object Communication       extends Qualification
 case object Market              extends Qualification
-case object ComputationEngineer extends Qualification
+case object ComputerEngineer    extends Qualification
 case object SystemEngineer      extends Qualification
 case object InformationEngineer extends Qualification
 case object Lawyer              extends Qualification

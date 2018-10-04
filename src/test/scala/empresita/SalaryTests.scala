@@ -37,19 +37,19 @@ class SalaryTests extends FlatSpec with Matchers {
   }
 
   "Salary of a sector director without any raise" should "equal 9500 plus 2% bonus" in {
-    company.hire(new Person("Rufus Tchufis", "180.300.500-48", format.parse("11-03-1977"), ComputationEngineer),
+    company.hire(new Person("Rufus Tchufis", "180.300.500-48", format.parse("11-03-1977"), ComputerEngineer),
       company.sectors.tech, SectorDirector)
     company.get_employee("180.300.500-48").salary() should equal(9500*1.02)
   }
 
   "Salary of a operation director without any raise" should "equal 13000 plus 2% bonus" in {
-    company.hire(new Person("Rufus Lufis", "180.300.500-49", format.parse("11-03-1977"), ComputationEngineer),
+    company.hire(new Person("Rufus Lufis", "180.300.500-49", format.parse("11-03-1977"), ComputerEngineer),
       company.sectors.tech, OperationDirector)
     company.get_employee("180.300.500-49").salary() should equal(13000*1.02)
   }
 
   "Salary of a executive director without any raise" should "equal 13000 plus 2% bonus" in {
-    company.hire(new Person("Rufus Rufis", "180.300.500-50", format.parse("11-03-1977"), ComputationEngineer),
+    company.hire(new Person("Rufus Rufis", "180.300.500-50", format.parse("11-03-1977"), ComputerEngineer),
       company.sectors.tech, ExecutiveDirector)
     company.get_employee("180.300.500-50").salary() should equal(18000*1.02)
   }

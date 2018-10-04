@@ -44,7 +44,7 @@ class SectorTests extends FlatSpec with Matchers {
       SystemEngineer), company.sectors.tech, Technician)
     company.sectors.tech.salaryAvg() should equal(3350)
     company.hire(new Person("Geroge Walrus", "123.789.941-10", format.parse("09-09-1945"),
-      ComputationEngineer), company.sectors.tech, SectorDirector)
+      ComputerEngineer), company.sectors.tech, SectorDirector)
     company.sectors.tech.salaryAvg() should equal(5463.33 +- 0.01)
   }
 
