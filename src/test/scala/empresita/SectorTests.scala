@@ -59,5 +59,13 @@ class SectorTests extends FlatSpec with Matchers {
 
   }
 
+  "It" should "be possible to remove an employee from a sector" in {
+    val company = new Company("Dummy Company")
+    company.hire(new Person("John Alfred", "123.456.789-10", format.parse("10-11-1990"),
+      SystemEngineer), company.sectors.tech, Technician)
+    company.sectors.tech.remove_emp("123.456.789-10")
+
+  }
+
 
 }

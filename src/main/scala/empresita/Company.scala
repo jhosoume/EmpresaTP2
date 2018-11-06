@@ -74,13 +74,9 @@ class Company(name: String) {
 //  }
 
 
-  /*def fire(empCPF: String): Unit ={
-    TODO keep this change?
-  }*/
   def fire(emp: Employee): Unit ={
     emp.sector.remove_emp(emp.CPF)
-  }//TODO turn employee into just a person?
-    //TODO employee is really gone or just inaccessible?
+  }
 
   def empsSalaryMean(): Double = {
     sectors.meanSalaryEmployees()

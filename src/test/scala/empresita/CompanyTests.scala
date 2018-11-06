@@ -3,7 +3,7 @@ package empresita
 import java.text.SimpleDateFormat
 import java.util.Date
 
-import empresita.positions.{Pro, SectorDirector}
+import empresita.positions._
 import empresita.sectors.SectorContainer
 import org.scalatest.{FlatSpec, Matchers}
 
@@ -28,6 +28,7 @@ class CompanyTests extends FlatSpec with Matchers {
   val dummyEmp2 = new Employee("Emp2", "002", format.parse("01-01-1980"),
     Lawyer, dummyComp, new Date(), dummyComp.sectors.norm, SectorDirector)
 
+
   dummyComp.assign_execDirector(dummyEmp1)
   dummyComp.assign_opDirector(dummyEmp2)
 
@@ -37,6 +38,30 @@ class CompanyTests extends FlatSpec with Matchers {
 
   "Emp2" should "be Operative Director" in {
     dummyComp.op_director should equal(dummyEmp2)
+  }
+
+  "Company" should "have a function to hire employees" in {
+    dummyCom.hire(new Person("John Alfred", "123.456.789-10", format.parse("10-11-1990"),
+      SystemEngineer), dummyCom.sectors.tech, Technician)
+    dummyCom.hire(new Person("George Walrus 2", "123.789.001-10", format.parse("21-09-1975"),
+      Lawyer), dummyCom.sectors.design, Assistant)
+    dummyCom.emps_names() should contain("John Alfred")
+    dummyCom.emps_names() should contain("George Walrus 2")
+  }
+
+  "When informed a CPF, the company" should "find its employee" in {
+    dummyCom.hire(new Person("John Alfred", "123.456.789-10", format.parse("10-11-1990"),
+      SystemEngineer), dummyCom.sectors.tech, Technician)
+    dummyCom.get_employee("123.456.789-10").name should equal("John Alfred")
+  }
+
+  "When a employee is fired, it" should "not be in the company list" in {
+    dummyCom.hire(new Person("George Walrus 2", "123.789.001-10", format.parse("21-09-1975"),
+      Lawyer), dummyCom.sectors.design, Assistant)
+    val george = dummyCom.get_employee("123.789.001-10")
+    dummyCom.emps_names() should contain("George Walrus 2")
+    dummyCom.fire(george)
+    dummyCom.emps_names() shouldNot contain("George Walrus 2")
   }
 
 }

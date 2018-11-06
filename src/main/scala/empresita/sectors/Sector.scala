@@ -49,9 +49,10 @@ trait Sector {
   }
 
   def remove_emp(empCPF: String): Unit = {
-    emps = emps.filterNot(emp => emp.CPF == empCPF)
-    if (emps.find(_.CPF == empCPF).get == director)
+    val emp = getEmployee(empCPF)
+    if (emp == director)
       director = null
+    emps = emps.filterNot(emp => emp.CPF == empCPF)
   }
 
   def has_employee(empCPF: String): Boolean = {
