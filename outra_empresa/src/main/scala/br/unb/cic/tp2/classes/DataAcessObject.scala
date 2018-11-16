@@ -105,8 +105,8 @@ object DataAcessObject extends DataExib {
     }
 
     val pw = new PrintWriter(new File(path + cpf + ".txt"))
-    pw.write("Nome : " + name + "\n")
-    pw.write("CPF : " + cpf + "\n")
+    pw.write("Nome : " + name + "\r\n")
+    pw.write("CPF : " + cpf + "\r\n")
     pw.write("date : " + bornDate)
     pw.close()
   }

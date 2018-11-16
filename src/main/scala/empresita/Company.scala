@@ -7,7 +7,7 @@ import empresita.positions._
 
 import scala.util.matching.Regex._
 import scala.io.Source
-import java.io.{FileNotFoundException, IOException}
+import java.io.{File, FileNotFoundException, IOException, PrintWriter}
 import java.text.SimpleDateFormat
 
 import scala.util.matching.Regex
@@ -56,6 +56,7 @@ class Company(name: String) {
   }
 
   def hire(person: Person, sector: Sector, position: Position): Employee = {
+    println(person.name + " has been hired.")
     new Employee(person.name, person.CPF, person.birthday, person.qualification,
       this, new Date(), sector, position)
   }
@@ -66,6 +67,7 @@ class Company(name: String) {
 
   def fire(emp: Employee): Unit ={
     emp.sector.remove_emp(emp.CPF)
+    println(emp.name + " has been fired.")
   }
 
   def empsSalaryMean(): Double = {
@@ -87,9 +89,9 @@ class Company(name: String) {
     try {
       val info = Source.fromFile(path + CPF + ".txt").getLines()
       for (line <- info) {
-        var att = line.split(":")
+        var att = line.split(": ")
         att(0) match {
-          case name_att() => name = att(1).replaceAll("\\s", "")
+          case name_att() => name = att(1)
           case date_att() => date = att(1).replaceAll("\\s", "").replaceAll("/", "-")
           case cpf_att() => cpf = att(1).replaceAll("\\s", "")
           case _ => println(att(0))
@@ -106,5 +108,14 @@ class Company(name: String) {
     this.hire(new_person, sector, position)
   }
 
+  def export_emp(emp: Employee, path: String): Unit = {
+    println(emp.name)
+    val pw = new PrintWriter(new File(path + emp.CPF + ".txt"))
+    pw.write("Nome : " + name + "\r\n")
+    pw.write("CPF : " + emp.CPF + "\r\n")
+    pw.write("date : " + emp.birthday)
+    pw.close()
+    fire(emp)
+  }
 }
 

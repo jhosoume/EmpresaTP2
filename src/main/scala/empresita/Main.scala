@@ -10,13 +10,13 @@ import java.util.Date
 object Main extends App {
   val format = new SimpleDateFormat("dd-MM-yyyy")
 
-  val myCom = new Company("Monsters Inc")
+  val monInc = new Company("Monsters Inc")
   val myCom2 = new Company("Tigus")
   println("¡Hola, mundo!")
   val eu = new Person(name = "It's me, Mario", CPF = "1",
     birthday = format.parse("03-02-1962"), qualification = BasicSchooling)
   val eu2 = new Employee(name = "June", CPF = "5", birthday = format.parse("14-08-1995"),
-    company = myCom, join_date = new Date(), sector = new Design, position = Assistant, qualification = Admin)
+    company = monInc, join_date = new Date(), sector = new Design, position = Assistant, qualification = Admin)
 
   println(eu2.getName)
   println(eu.getName)
@@ -28,6 +28,8 @@ object Main extends App {
 
   val luciana = new Person("Luciana", "73464979024",
     format.parse("1947-03-03"), ComputerEngineer)
+
+  monInc.hire(luciana, monInc.sectors.design, Assistant)
 
   val santiago = new Employee("Santiago", "84112913087",
     format.parse("1948-11-05"), SystemEngineer, IASA, new Date(),
@@ -321,5 +323,10 @@ object Main extends App {
     format.parse("1994-12-30"), Account, IASA, new Date(),
     IASA.sectors.norm, Assistant)
 
-  IASA.import_emp("03783413130", "/home/jhosoume/unb/tp2/empresita/inputs/", Assistant, IASA.sectors.norm)
+  IASA.import_emp("03783413130", "C:\\Luisa\\UnB\\2018-02\\TP2\\empresita\\inputs\\", Assistant, IASA.sectors.norm)
+  IASA.export_emp(IASA.get_employee("14025360039"), "C:\\Luisa\\UnB\\2018-02\\TP2\\empresita\\inputs\\")
+
 }
+
+
+
