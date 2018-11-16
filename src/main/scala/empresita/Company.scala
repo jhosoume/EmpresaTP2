@@ -5,8 +5,15 @@ import java.util.Date
 import empresita.sectors._
 import empresita.positions._
 
-class Company(name: String) {
+import scala.util.matching.Regex._
+import scala.io.Source
+import java.io.{FileNotFoundException, IOException}
+import java.text.SimpleDateFormat
 
+import scala.util.matching.Regex
+
+class Company(name: String) {
+  val format = new SimpleDateFormat("dd-MM-yyyy")
   var sectors: SectorContainer = new SectorContainer
 
   var op_director: Employee = _
@@ -57,23 +64,6 @@ class Company(name: String) {
     sectors.sectorsObjs().map(_.getEmployee(CPF)).find(emp => emp != null && emp.CPF == CPF).orNull
   }
 
-//  def hire(person: Person, sector: String, position: Position): Employee = {
-//    val sec = this.sectors.getSector(sector)
-//    hire(person, sec, position)
-//  }
-//
-//  def hire(name: String, CPF: String, birthday: Date, qualification: Qualification, sector: Sector, position: Position): Employee = {
-//    val pers = new Person(name, CPF, birthday, qualification)
-//    hire(pers, sector, position)
-//  }
-//
-//  def hire(name: String, CPF: String, birthday: Date, qualification: Qualification, sector: String, position: Position): Employee = {
-//    val sec = this.sectors.getSector(sector)
-//    val pers = new Person(name, CPF, birthday, qualification)
-//    hire(pers, sec, position)
-//  }
-
-
   def fire(emp: Employee): Unit ={
     emp.sector.remove_emp(emp.CPF)
   }
@@ -84,6 +74,36 @@ class Company(name: String) {
 
   def sectorsSalaryMean(): Double = {
     sectors.meanSalarySectors()
+  }
+
+  def import_emp(CPF: String, path: String, position: Position, sector: Sector): Unit = {
+    val name_att : Regex = "(?i).*N[a, o]me.*".r
+    val date_att : Regex = "(?i).*dat[a, e].*".r
+    val cpf_att : Regex = "(?i).*cpf.*".r
+    val date_info : Regex = """.*(\d\d)/(\d\d)/(\d\d\d\d).*""".r
+    var name = "Unknwon"
+    var date = "01-01-2001"
+    var cpf = ""
+    try {
+      val info = Source.fromFile(path + CPF + ".txt").getLines()
+      for (line <- info) {
+        var att = line.split(":")
+        att(0) match {
+          case name_att() => name = att(1).replaceAll("\\s", "")
+          case date_att() => date = att(1).replaceAll("\\s", "").replaceAll("/", "-")
+          case cpf_att() => cpf = att(1).replaceAll("\\s", "")
+          case _ => println(att(0))
+//          case _ => println("Attribute in person transfer not recognized")
+        }
+
+      }
+    } catch {
+      case e: FileNotFoundException => println("Couldn't find that file.")
+      case e: IOException => println("Got an IOException!")
+    }
+    val new_person = new Person(name, cpf,
+      birthday = format.parse(date), qualification = BasicSchooling)
+    this.hire(new_person, sector, position)
   }
 
 }

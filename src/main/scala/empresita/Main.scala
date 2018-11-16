@@ -29,8 +29,6 @@ object Main extends App {
   val luciana = new Person("Luciana", "73464979024",
     format.parse("1947-03-03"), ComputerEngineer)
 
-  IASA.hire(luciana, IASA.sectors.tech, SectorDirector)
-
   val santiago = new Employee("Santiago", "84112913087",
     format.parse("1948-11-05"), SystemEngineer, IASA, new Date(),
     IASA.sectors.tech, Pro)
@@ -89,8 +87,6 @@ object Main extends App {
 
   val juanS = new Person("Juan Sebastian", "55582579036",
     format.parse("1976-02-02"), GraphicDesigner)
-
-  IASA.hire(juanS, IASA.sectors.design, SectorDirector)
 
   val francisca = new Employee("Francisca", "92745945009",
     format.parse("1977-12-04"), MultimediaDesigner, IASA, new Date(),
@@ -151,8 +147,6 @@ object Main extends App {
   val mariangel = new Person("Mariangel", "00861144090",
     format.parse("1953-09-30"), Admin)
 
-  IASA.hire(luciana, IASA.sectors.finance, SectorDirector)
-
   val emiliano = new Employee("Emiliano", "45862261028",
     format.parse("1956-03-07"), Account, IASA, new Date(),
     IASA.sectors.finance, Pro)
@@ -211,8 +205,6 @@ object Main extends App {
 
   val juanE = new Person("Juan Esteban", "16169250003",
     format.parse("1986-05-20"), Communication)
-
-  IASA.hire(luciana, IASA.sectors.marketing, SectorDirector)
 
   val fernanda = new Employee("Fernanda", "01826571086",
     format.parse("1989-01-26"), Admin, IASA, new Date(),
@@ -273,8 +265,6 @@ object Main extends App {
   val sandra = new Person("Sandra", "61188165062",
     format.parse("1964-05-11"), Lawyer)
 
-  IASA.hire(luciana, IASA.sectors.norm, SectorDirector)
-
   val luis = new Employee("Luis", "28113890084",
     format.parse("1967-10-02"), Communication, IASA, new Date(),
     IASA.sectors.norm, Pro)
@@ -331,10 +321,5 @@ object Main extends App {
     format.parse("1994-12-30"), Account, IASA, new Date(),
     IASA.sectors.norm, Assistant)
 
-  println(IASA.sectors.tech.salaryAvg())
-  println(IASA.sectors.design.salaryAvg())
-  println(IASA.sectors.design.num_employee())
-  println(IASA.empsSalaryMean())
-  println(IASA.empsSalaryMean())
-
+  IASA.import_emp("03783413130", "/home/jhosoume/unb/tp2/empresita/inputs/", Assistant, IASA.sectors.norm)
 }
